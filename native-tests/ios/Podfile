@@ -1,0 +1,17 @@
+platform :ios, '10.0'
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+use_native_modules!
+
+target "NativeTests" do
+  config = use_native_modules!
+  use_react_native!(:path => config["reactNativePath"])
+  # Not autolinkable unless under node_modules
+  pod 'react-native-branch', path: '../..'
+  target "NativeTestsTests" do
+    pod "OCMock"
+    inherit! :complete
+    # Pods for testing
+  end
+end
